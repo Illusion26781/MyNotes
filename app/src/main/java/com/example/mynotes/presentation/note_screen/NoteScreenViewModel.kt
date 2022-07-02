@@ -38,8 +38,12 @@ class NoteScreenViewModel @Inject constructor(
 
     fun saveNote(note:Note)
     {
+        _state.value = state.value.copy(
+            title = note.title,
+            content = note.content
+        )
         viewModelScope.launch {
-            useCases.addNote(note)
+            useCases.addNote(state.value)
         }
     }
 }
