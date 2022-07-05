@@ -6,19 +6,22 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavController
 import com.example.mynotes.domain.model.Note
 import com.example.mynotes.presentation.note_screen.components.AddEditNote
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+@Destination
 @Composable
 fun NoteScreen(
-    navController: NavController,
+    navigator: DestinationsNavigator,
     viewModel: NoteScreenViewModel = hiltViewModel(),
+    note: Note = Note()
 ) {
 
-    val note = viewModel.state.value
     AddEditNote(note)
     {
         if (it != null) {
             viewModel.saveNote(it)
         }
-        navController.navigateUp()
+        navigator.navigateUp()
     }
 }

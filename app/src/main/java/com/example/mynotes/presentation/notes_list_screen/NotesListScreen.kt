@@ -3,11 +3,15 @@ package com.example.mynotes.presentation.notes_list_screen
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.mynotes.presentation.destinations.NoteScreenDestination
 import com.example.mynotes.presentation.notes_list_screen.components.NotesScaffold
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+@Destination(start = true)
 @Composable
 fun NotesListScreen(
-    navController: NavController,
+    navigator: DestinationsNavigator,
     viewModel: NotesListScreenViewModel = hiltViewModel()
 )
 {
@@ -17,9 +21,9 @@ fun NotesListScreen(
     {
         when(it)
         {
-            is NotesEvents.AddNote -> navController.navigate("note")
+            is NotesEvents.AddNote -> {navigator.navigate(NoteScreenDestination())}
             is NotesEvents.EditNote -> {
-                navController.navigate("note?noteId=${it.note.id!!}")
+                navigator.navigate(NoteScreenDestination(it.note))
             }
             else -> viewModel.onEvent(it)
         }
