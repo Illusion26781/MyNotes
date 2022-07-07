@@ -48,7 +48,7 @@ fun AddEditNote(
 
         TextField(value = noteContent, onValueChange = { noteContent = it },
             modifier = Modifier
-                .background(Color.Yellow)
+                .background(Color.DarkGray)
                 .fillMaxSize()
         )
 

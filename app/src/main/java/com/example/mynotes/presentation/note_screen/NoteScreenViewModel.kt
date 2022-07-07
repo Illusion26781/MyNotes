@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mynotes.domain.model.Note
 import com.example.mynotes.domain.usecase.UseCases
-import com.example.mynotes.presentation.notes_list_screen.NotesState
+import com.example.mynotes.presentation.navArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,22 +19,15 @@ class NoteScreenViewModel @Inject constructor(
 
 ) :ViewModel()
 {
-
-
-    init {
-        savedStateHandle.get<Int>("noteId")?.let { noteId ->
-            if(noteId != -1) {
-                viewModelScope.launch {
-                    useCases.getNote(noteId)?.also { note ->
-                        _state.value = note
-                    }
-                }
-            }
-        }
-    }
-
     private val _state = mutableStateOf(Note())
     val state: State<Note> = _state
+
+    init {
+
+        _state.value = savedStateHandle.navArgs()
+    }
+
+
 
     fun saveNote(note:Note)
     {

@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mynotes.domain.model.Note
 import com.example.mynotes.presentation.notes_list_screen.NotesEvents
+import com.example.mynotes.ui.theme.MyNotesTheme
 
 @Composable
 fun Note(
@@ -34,7 +35,7 @@ fun Note(
 
     {
         Row{
-            note.title?.let { Text(it) }
+            note.title?.let { Text(it, color = Color.Black) }
             Spacer(modifier = Modifier.weight(1f))
             IconButton(onClick = {
                 onEvent(NotesEvents.RemoveNote(note))
@@ -49,9 +50,11 @@ fun Note(
 @Preview
 @Composable
 fun PreviewNote() {
-    Column(){
-        Note(Note(title = "It's ok")){}
-        Spacer(Modifier.height(10.dp))
-        Note(Note()){}
+    MyNotesTheme(darkTheme = true){
+        Column() {
+            Note(Note(title = "It's ok")) {}
+            Spacer(Modifier.height(10.dp))
+            Note(Note()) {}
+        }
     }
 }

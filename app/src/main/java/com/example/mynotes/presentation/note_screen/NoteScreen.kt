@@ -9,15 +9,16 @@ import com.example.mynotes.presentation.note_screen.components.AddEditNote
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
-@Destination
+@Destination(
+    navArgsDelegate = Note::class
+)
 @Composable
 fun NoteScreen(
     navigator: DestinationsNavigator,
     viewModel: NoteScreenViewModel = hiltViewModel(),
-    note: Note = Note()
 ) {
 
-    AddEditNote(note)
+    AddEditNote(viewModel.state.value)
     {
         if (it != null) {
             viewModel.saveNote(it)
