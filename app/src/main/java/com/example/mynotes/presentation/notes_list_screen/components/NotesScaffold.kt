@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.mynotes.domain.model.Note
 import com.example.mynotes.presentation.notes_list_screen.NotesEvents
+import com.example.mynotes.ui.theme.MyNotesTheme
 import com.example.mynotes.presentation.notes_list_screen.components.Note as NoteComp
 
 @Composable
@@ -30,7 +31,7 @@ fun NotesScaffold(
         topBar = {
                  TopAppBar() {
                      Row{
-                         Text("MyNote")
+                         Text("MyNotes", Modifier.padding(start = 20.dp))
                      }
                  }
         },
@@ -46,8 +47,8 @@ fun NotesScaffold(
         },
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.DarkGray),
-        backgroundColor = MaterialTheme.colors.secondaryVariant,
+        ,
+        backgroundColor = MaterialTheme.colors.background,
         scaffoldState = scaffoldState,
 
     ) {
@@ -75,9 +76,12 @@ fun NotesScaffoldPreview(
 
 )
 {
-    val notes = listOf(
-        Note(),
-        Note("Testing"),
-    ).toMutableStateList()
+    MyNotesTheme(){
+        val notes = listOf(
+            Note(),
+            Note("Testing"),
+        ).toMutableStateList()
+        NotesScaffold(notes = notes) {}
+    }
 
 }

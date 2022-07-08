@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -24,7 +25,7 @@ fun Note(
 ) {
     Box(
         Modifier
-            .background(Color.Yellow)
+            .background(MaterialTheme.colors.secondary)
             .fillMaxWidth()
             .defaultMinSize(100.dp, 50.dp)
             .padding(20.dp)
@@ -35,7 +36,7 @@ fun Note(
 
     {
         Row{
-            note.title?.let { Text(it, color = Color.Black) }
+            note.title?.let { Text(it) }
             Spacer(modifier = Modifier.weight(1f))
             IconButton(onClick = {
                 onEvent(NotesEvents.RemoveNote(note))

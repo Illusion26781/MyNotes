@@ -27,8 +27,6 @@ class NoteScreenViewModel @Inject constructor(
         _state.value = savedStateHandle.navArgs()
     }
 
-
-
     fun saveNote(note:Note)
     {
         _state.value = state.value.copy(

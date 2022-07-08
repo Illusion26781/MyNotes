@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.mynotes.domain.model.Note
+import com.example.mynotes.ui.theme.MyNotesTheme
 
 @Composable
 fun AddEditNote(
@@ -48,7 +49,7 @@ fun AddEditNote(
 
         TextField(value = noteContent, onValueChange = { noteContent = it },
             modifier = Modifier
-                .background(Color.DarkGray)
+                .background(MaterialTheme.colors.primaryVariant)
                 .fillMaxSize()
         )
 
@@ -59,10 +60,15 @@ fun AddEditNote(
 @Composable
 fun AddEditNotePreview() 
 {
-    AddEditNote(note = Note("test", "this is a test\n" +
-            "sadsadaswdsawds\n" +
-            "awdsasdw\n" +
-            "sawdsa\n" +
-            "dwasad")
-    ) {}
+    MyNotesTheme(){
+        AddEditNote(
+            note = Note(
+                "test", "this is a test\n" +
+                        "sadsadaswdsawds\n" +
+                        "awdsasdw\n" +
+                        "sawdsa\n" +
+                        "dwasad"
+            )
+        ) {}
+    }
 }
